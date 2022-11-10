@@ -1,18 +1,15 @@
 class Solution {
     public int countStudents(int[] students, int[] sandwiches) {
         int n=students.length;
-      ArrayDeque<Integer>q=new ArrayDeque<>();
-    Stack<Integer>s=new Stack<>();
-        for(int i=n-1;i>=0;i--)
-            s.push(sandwiches[i]);
+      Queue<Integer>q=new LinkedList<>();
             for(int i=0;i<n;i++)
                 q.offer(students[i]);
-        int arr[]=new int[2];
+       int top=0;
         int cnt=0;
         while(!q.isEmpty() && cnt!=q.size())
         {
             
-            if(q.peekFirst()!=s.peek())
+            if(q.peek()!=sandwiches[top])
             {
                
                 q.offer(q.poll());
@@ -23,7 +20,7 @@ class Solution {
                 {
                    cnt=0;  
                     q.poll();
-                    s.pop();
+                    top++;
                 }
         }
         return q.size();

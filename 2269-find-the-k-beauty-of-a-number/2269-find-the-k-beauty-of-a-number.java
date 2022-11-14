@@ -1,22 +1,14 @@
 class Solution {
     public int divisorSubstrings(int num, int k) {
-        String st=String.valueOf(num),s="";
-        char ch[]=st.toCharArray();
-        int n=st.length(),c=0;
-     int j=0;
-        while(j<n)
+       int y=(int)Math.pow(10,k-1);
+        int org=num;
+        int c=0;
+        while(num/y>0)
         {
-          s+=ch[j];
-            if(s.length()<k)
-                j++;
-            else if(s.length()==k)
-            {
-                int x=Integer.parseInt(s);
-                if(x!=0 && num%x==0)
-                    c++;
-                s=s.substring(1);
-                j++;
-            }
+            int r=num%(y*10);
+            if(r!=0 && org%r==0)
+                c++;
+            num=num/10;
         }
         return c;
     }

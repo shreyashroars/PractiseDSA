@@ -24,7 +24,6 @@ class Solution {
         if(root.left==null && root.right==null)
         {
             sum+=Integer.parseInt(s,2);
-            s=s.substring(0,s.length()-1);
              
         }
        sumdedo(root.left,s);

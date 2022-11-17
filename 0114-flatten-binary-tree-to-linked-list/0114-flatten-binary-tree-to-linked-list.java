@@ -13,18 +13,26 @@
  *     }
  * }
  */
-//Using reverse preorder
+//Using stack and level order traversal(iterative)
 class Solution {
-    TreeNode prev=null;
+   
     public void flatten(TreeNode root)
     {
         if(root==null)
             return;
-        flatten(root.right);
-        flatten(root.left);
-        root.right=prev;
-        root.left=null;
-        prev=root;
+        Stack<TreeNode>s=new Stack<>();
+        s.push(root);
+        while(!s.isEmpty())
+        {
+            TreeNode curr=s.pop();
+            if(curr.right!=null)
+                s.push(curr.right);
+              if(curr.left!=null)
+                s.push(curr.left);
+            if(!s.isEmpty())
+            curr.right=s.peek();
+            curr.left=null;
+        }
        
     }
    

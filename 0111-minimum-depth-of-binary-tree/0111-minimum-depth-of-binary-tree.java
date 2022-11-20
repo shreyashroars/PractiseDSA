@@ -14,33 +14,14 @@
  * }
  */
 class Solution {
-    int l=0,min=1000000;
-    public void trav(TreeNode root)
-    {
-        Queue<TreeNode>q=new LinkedList<>();
-        q.add(root);
-        while(!q.isEmpty())
-        {
-           int cnt=q.size();
-            l++;
-            for(int i=0;i<cnt;i++)
-            {
-                TreeNode curr=q.poll();
-                if(curr.left==null && curr.right==null)
-                    min=Math.min(min,l);
-                if(curr.left!=null)
-                    q.add(curr.left);
-                if(curr.right!= null)
-                    q.add(curr.right);
-            }
-            
-        }
-    }
+   
     public int minDepth(TreeNode root) {
-        if(root==null)
-            return 0;
-        trav(root);
-        return min;
+         if(root == null) 
+             return 0;
+       int left = minDepth(root.left);
+       int right = minDepth(root.right);
+
+       return (left == 0 || right == 0) ? left + right + 1 : Math.min(left, right) + 1; 
         
     }
 }

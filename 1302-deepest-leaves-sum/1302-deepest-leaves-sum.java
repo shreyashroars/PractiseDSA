@@ -14,25 +14,33 @@
  * }
  */
 class Solution {
-    int sum;
-    int height(TreeNode root)
-    {
-       if(root==null)
-           return 0;
-        return Math.max(height(root.left),height(root.right))+1;
-    }
-    void sumk(TreeNode root,int k)
+   int maxLevel=0;
+    int sum=0;
+    void sumk(TreeNode root,int level)
     {
         if(root==null)
             return;
-        if(k==1)
+       
+        if(maxLevel==level)
+             if(root.left==null && root.right==null)
+        {
             sum+=root.val;
-         sumk(root.left,k-1);
-         sumk(root.right,k-1);
+             }
+        if(maxLevel<level)
+        {
+             if(root.left==null && root.right==null)
+        {
+            sum=root.val;
+             }
+            maxLevel=level;
+        }
+    
+         sumk(root.left,level+1);
+         sumk(root.right,level+1);
     }
     public int deepestLeavesSum(TreeNode root) {
-       int k= height(root);
-        sumk(root,k);
+        
+        sumk(root,1);
         return sum;
     }
 }

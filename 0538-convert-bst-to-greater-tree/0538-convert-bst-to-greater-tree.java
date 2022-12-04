@@ -15,28 +15,18 @@
  */
 class Solution {
     int s=0;
-    Stack<Integer>arr=new Stack<>();
     public void inorderkaulta(TreeNode root)
     {
        if(root==null)
            return;
         inorderkaulta(root.right);
         s+=root.val;
-        arr.push(s);
+       root.val=s;
         inorderkaulta(root.left);
     }
-   public void  inorder(TreeNode root)
-   {
-       if(root==null)
-           return;
-       inorder(root.left);
-       root.val=arr.pop();
-       inorder(root.right);
-       
-   }
     public TreeNode convertBST(TreeNode root) {
     inorderkaulta(root);
-        inorder(root);
+       
         return root;
     }
 }

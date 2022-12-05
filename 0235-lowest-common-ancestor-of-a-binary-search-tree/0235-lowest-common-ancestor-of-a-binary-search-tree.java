@@ -10,17 +10,16 @@
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root==null)
-            return null;
-        if(root.val==p.val||root.val==q.val)
-            return root;
-        TreeNode lca1=lowestCommonAncestor(root.left,p,q);
-        TreeNode lca2=lowestCommonAncestor(root.right,p,q);
-        if(lca1!=null && lca2!=null)
-            return root;
-        if(lca1!=null)
-            return lca1;
-        else
-            return lca2;
+        int small = Math.min(p.val, q.val);
+        int large = Math.max(p.val, q.val);
+        while (root != null) {
+            if (root.val > large) // p, q belong to the left subtree
+                root = root.left;
+            else if (root.val < small) // p, q belong to the right subtree
+                root = root.right;
+            else // Now, small <= root.val <= large -> This root is the LCA between p and q
+                return root;
+        }
+        return null;
     }
 }

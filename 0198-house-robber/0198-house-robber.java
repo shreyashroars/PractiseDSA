@@ -13,7 +13,7 @@ class Solution {
            }
        int pick=nums[i]+prev2;
        int ntpick=0+prev;
-         curr=(int)Math.max(pick,ntpick);
+       curr=(int)Math.max(pick,ntpick);
            prev2=prev;
            prev=curr;
     }

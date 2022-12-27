@@ -36,16 +36,42 @@ public class Solution {
         n=r;
         m=c;
         int [][][]dp=new int[r][c][c];
-        for(int i=0;i<r;i++)
+        for(int j=0;j<m;j++)
         {
-            for(int j=0;j<c;j++)
+            for(int k=0;k<m;k++)
             {
-                for(int k=0;k<c;k++)
+                if(j==k)
+                    dp[n-1][j][k]=mat[n-1][j];
+                else
+                    dp[n-1][j][k]=mat[n-1][j]+mat[n-1][k];
+            }
+                
+        }
+        for(int i=n-2;i>=0;i--)
+            for(int j1=0;j1<m;j1++)
+                for(int j2=0;j2<m;j2++)
                 {
-                    dp[i][j][k]=-1;
-                }
+          int maxi=0;
+        for(int dj1=-1;dj1<=1;dj1++)
+        {
+            for(int dj2=-1;dj2<=1;dj2++)
+            {
+                int val=0;
+                if(j1==j2)
+                   val=mat[i][j1];
+                else
+                    val=mat[i][j1]+mat[i][j2];
+                if(j1+dj1>=0 && j1+dj1<m&& j2+dj2>=0 && j2+dj2<m)
+                val+=dp[i+1][j1+dj1][j2+dj2];
+                else
+                    val+=-10000000;
+                  maxi=Math.max(maxi,val);   
+                    
             }
         }
-	  return maxCh(0,0,c-1,mat,dp);
+         dp[i][j1][j2]=maxi;
+                }
+        return dp[0][0][m-1];
+        
 	}
 }

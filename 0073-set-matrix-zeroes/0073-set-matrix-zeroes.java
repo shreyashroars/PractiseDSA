@@ -15,9 +15,16 @@ class Solution {
               if(matrix[i][j]==0)
               {
                  for(int k=0;k<matrix.length;k++)
-                     new_matrix[k][j]=0;
+                 {
+                     if(matrix[k][j]!=0)
+                         matrix[k][j]=-9999;
+                 }
                  for(int k=0;k<matrix[0].length;k++)
-                     new_matrix[i][k]=0;
+                 {
+                     if(matrix[i][k]!=0)
+                         matrix[i][k]=-9999;
+                 }
+                     
               }
                   
               }
@@ -26,7 +33,8 @@ class Solution {
       {
           for(int j=0;j<matrix[0].length;j++)
           {
-              matrix[i][j]=new_matrix[i][j];
+              if(matrix[i][j]==-9999)
+                  matrix[i][j]=0;
           }
         }
        

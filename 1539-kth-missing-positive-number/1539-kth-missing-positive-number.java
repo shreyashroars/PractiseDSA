@@ -1,6 +1,6 @@
 class Solution {
     public int findKthPositive(int[] arr, int k) {
-      int org[]=new int[100000];
+      int org[]=new int[10000];
         for(int i=0;i<arr.length;i++)
             org[arr[i]]=-1;
         int y=0;

@@ -1,7 +1,9 @@
 class Solution {
     public int maxProduct(int[] arr) {
-        Arrays.sort(arr);
-        return (arr[arr.length-1]-1)*(arr[arr.length-2]-1);
+       PriorityQueue<Integer>pq=new PriorityQueue<>(Collections.reverseOrder());
+        for(int x:arr)
+            pq.add(x);
+        return (pq.poll()-1)*(pq.poll()-1);
         
     }
 }

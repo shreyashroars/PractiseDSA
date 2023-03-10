@@ -9,16 +9,20 @@
  * }
  */
 class Solution {
-    private ArrayList<Integer> range = new ArrayList<>();
+    ListNode head;
     public Solution(ListNode head) {
-        while (head != null) {
-            this.range.add(head.val);
-            head = head.next;
-        }
+        this.head=head;
     }
+    
     public int getRandom() {
-        int pick = (int)(Math.random() * this.range.size());
-        return this.range.get(pick);
+        ListNode node=head;
+        int counter=0, res=0;
+        while (node!=null){
+            counter++;
+            if ((int)(Math.random()*counter)==0) res=node.val;
+            node=node.next;
+        }
+        return res;       
     }
 }
 

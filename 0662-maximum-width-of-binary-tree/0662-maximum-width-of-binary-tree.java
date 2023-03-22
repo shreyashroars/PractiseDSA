@@ -28,11 +28,11 @@ class Solution {
             for(int i=0;i<cnt;i++)
             {
                 Pair<TreeNode,Long>curr=q.poll();
-                //long idx=curr.getValue()-startInd;
+                long idx=curr.getValue()-startInd;
                 if(curr.getKey().left!=null)
-                    q.offer(new Pair<TreeNode,Long>(curr.getKey().left,(long)2*curr.getValue()+1));
+                    q.offer(new Pair<TreeNode,Long>(curr.getKey().left,(long)2*idx+1));
                 if(curr.getKey().right!=null)
-                    q.offer(new Pair<TreeNode,Long>(curr.getKey().right,(long)2*curr.getValue()+2));
+                    q.offer(new Pair<TreeNode,Long>(curr.getKey().right,(long)2*idx+2));
                 
             }
         }

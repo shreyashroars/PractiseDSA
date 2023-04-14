@@ -1,27 +1,35 @@
 class Solution {
     String s1,s2;
-    public int distsub(int i1,int i2,int dp[][])
-    {
-        if(i2<0)
-            return 1;
-        if(i1<0)
-            return 0;
-        if(dp[i1][i2]!=-1)
-            return dp[i1][i2];
-        if(s1.charAt(i1)==s2.charAt(i2))
-            return dp[i1][i2]=distsub(i1-1,i2-1,dp)+distsub(i1-1,i2,dp);
-        else
-            return dp[i1][i2]=distsub(i1-1,i2,dp);
-    }
     public int numDistinct(String s, String t) {
         s1=s;
         s2=t;
         int n1=s.length();
         int n2=t.length();
-        int dp[][]=new int[n1][n2];
-        for(int rows[]:dp)
-            Arrays.fill(rows,-1);
-       return  distsub(n1-1,n2-1,dp);
+        int dp[][]=new int[n1+1][n2+1];
+        for(int i=0;i<=n1;i++)
+            dp[i][0]=1;
+        for(int i=1;i<=n2;i++)
+            dp[0][i]=0;
+        for(int i=1;i<=n1;i++)
+        {
+            for(int j=1;j<=n2;j++)
+            {
+                if(s1.charAt(i-1)==s2.charAt(j-1))
+                    dp[i][j]=dp[i-1][j-1]+dp[i-1][j];
+                else
+                    dp[i][j]=dp[i-1][j];
+            }
+        }
+    //     for(int i=0;i<=n1;i++)
+    //     {
+    //         for(int j=0;j<=n2;j++)
+    //         {
+    //             System.out.print(dp[i][j]+" ");
+    //         }
+    //     System.out.println();
+    // }
+        
+       return  dp[n1][n2];
         
     }
 }

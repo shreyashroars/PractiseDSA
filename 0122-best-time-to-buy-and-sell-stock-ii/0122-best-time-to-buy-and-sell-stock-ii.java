@@ -1,31 +1,30 @@
 class Solution {
    int profit=-2;
-    public int stocks(int ind,int buy,int[]prices,int [][]dp)
-    {
-        if(ind==prices.length) // he bought but could not sell so we must return 0
-            return 0;
-        if(dp[ind][buy]!=-1)
-            return dp[ind][buy];
-       if(buy==1)
+    public int maxProfit(int[] prices) {
+        int dp[][]=new int[prices.length+1][2];
+        dp[prices.length][0]=dp[prices.length][1]=0;
+       for(int ind=prices.length-1;ind>=0;ind--)
        {
-           profit=Math.max(-prices[ind]+stocks(ind+1,0,prices,dp)//bought the stock on that day
-                           ,0+stocks(ind+1,1,prices,dp)//not bought the stock on that day
+           for(int buy=0;buy<=1;buy++)
+           {
+            if(buy==1)
+       {
+           profit=Math.max(-prices[ind]+dp[ind+1][0]//bought the stock on that day
+                           ,0+dp[ind+1][1]//not bought the stock on that day
                           );
     }
     else
     {
-        profit=Math.max(prices[ind]+stocks(ind+1,1,prices,dp)//bought the stock on that day
-                           ,0+stocks(ind+1,0,prices,dp)//not bought the stock on that day
+        profit=Math.max(prices[ind]+dp[ind+1][1]//bought the stock on that day
+                           ,0+dp[ind+1][0]//not bought the stock on that day
                           );
         
     }
-    return dp[ind][buy]=profit;
-}
-    public int maxProfit(int[] prices) {
-        int dp[][]=new int[prices.length][2];
-        for(int[] rows:dp)
-            Arrays.fill(rows,-1);
+        dp[ind][buy]=profit;
+       }
+       }
+           
         
-       return stocks(0,1,prices,dp);
+      return dp[0][1];
     }
 }

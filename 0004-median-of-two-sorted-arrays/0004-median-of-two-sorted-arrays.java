@@ -1,25 +1,32 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int n1=nums1.length;
+       int n1=nums1.length;
         int n2=nums2.length;
-        int arr[]=new int[n1+n2];
-        int i=0,j=0,k=0;
-        while(i<n1 && j<n2)
+        if(n2<n1)
+            return findMedianSortedArrays(nums2,nums1);
+        int low=0,high=n1,medianPos=(n1+n2+1)/2;
+        while(low<=high)
         {
-            if(nums1[i]<nums2[j])
-                arr[k++]=nums1[i++];
+        int cut1=(low+high)/2;
+        int cut2=medianPos-cut1;
+        int l1=cut1==0?Integer.MIN_VALUE:nums1[cut1-1];
+        int l2=cut2==0?Integer.MIN_VALUE:nums2[cut2-1];
+        int r1=cut1==n1?Integer.MAX_VALUE:nums1[cut1];
+        int r2=cut2==n2?Integer.MAX_VALUE:nums2[cut2];
+        if(l1<=r2 && l2<=r1)
+        {
+            if((n1+n2)%2==0)
+                return (Math.max(l1,l2)+Math.min(r1,r2))/2.00000;
             else 
-                arr[k++]=nums2[j++];
+                return Math.max(l1,l2);
         }
-        while(i<n1)
-            arr[k++]=nums1[i++];
-        while(j<n2)
-            arr[k++]=nums2[j++];
-        int n=n1+n2;
-        if(n%2==0)
-            return (arr[n/2-1]+arr[n/2])/2.00000;
-        else
-            return arr[n/2]/1.00000;
+        else if(l1>r2)
+            high=cut1-1;
+        else 
+            low=cut1+1;
+        }
+        throw null;   
+        
         
     }
 }

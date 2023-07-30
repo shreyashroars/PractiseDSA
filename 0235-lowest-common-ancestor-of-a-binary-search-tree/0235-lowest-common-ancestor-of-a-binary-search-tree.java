@@ -9,17 +9,39 @@
  */
 
 class Solution {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        int small = Math.min(p.val, q.val);
-        int large = Math.max(p.val, q.val);
-        while (root != null) {
-            if (root.val > large) // p, q belong to the left subtree
-                root = root.left;
-            else if (root.val < small) // p, q belong to the right subtree
-                root = root.right;
-            else // Now, small <= root.val <= large -> This root is the LCA between p and q
-                return root;
+     TreeNode lca;
+    HashSet<TreeNode>arr=new HashSet<>();
+    void trav1(TreeNode root,TreeNode n1)
+    {
+        
+        if(root==n1)
+        {
+            if(arr.contains(root))
+            lca=root;
+            arr.add(root);
+            return;
         }
-        return null;
+        if(root.val<n1.val)
+        {
+            if(arr.contains(root))
+                lca=root;
+            else
+            arr.add(root);
+            trav1(root.right,n1);
+        }
+        else
+        {
+            if(arr.contains(root))
+                lca=root;
+           arr.add(root);
+            trav1(root.left,n1); 
+        }
+    }
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        lca=root;
+        trav1(root,p);
+        trav1(root,q);
+        return lca;
+        
     }
 }

@@ -17,14 +17,14 @@ class Solution {
     ArrayList<TreeNode>arr=new ArrayList<>();
     ArrayList<TreeNode>ans=new ArrayList<>();
     int sum=0;
-    public void printKNode(TreeNode root,int cnt,TreeNode blocker)
+    public void printKNode(TreeNode root,int cnt,TreeNode blocker)//preorder
     {
         if(root==null||root==blocker)
             return;
-        cnt++;
+       // cnt;
         sum=Math.max(sum,cnt);
-        printKNode(root.left,cnt,blocker);
-        printKNode(root.right,cnt,blocker);
+        printKNode(root.left,cnt+1,blocker);
+        printKNode(root.right,cnt+1,blocker);
     }
     public void preorder(TreeNode root,int start)
     {
@@ -44,7 +44,7 @@ class Solution {
         Collections.reverse(ans);
         for(int i=0;i<ans.size();i++)
         {
-            printKNode(ans.get(i),i-1,i==0?null:ans.get(i-1));
+            printKNode(ans.get(i),i,i==0?null:ans.get(i-1));
         }
         return sum;
         

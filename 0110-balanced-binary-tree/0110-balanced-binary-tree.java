@@ -19,6 +19,8 @@ class Solution {
     {
         if(root==null)
             return 0;
+        if(flag==false)
+            return 0;
          int lh=height(root.left);
          int rh= height(root.right);
         if(Math.abs(lh-rh)>1)

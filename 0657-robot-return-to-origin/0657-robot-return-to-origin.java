@@ -1,20 +1,20 @@
 class Solution {
     public boolean judgeCircle(String moves) {
-        long s=0;
+        int x=0,y=0;
         for(int i=0;i<moves.length();i++)
         {
             char c=moves.charAt(i);
             if(c=='U')
-                s+=1;
+                y++;
             else if(c=='L')
-                s-=100000;
+                x--;
             else if(c=='R')
-                s+=100000;
+                x++;
             else
-                s-=1;
+                y--;
             //System.out.println(s);
         }
-        return s==0;
+        return x==0 && y==0;
         
     }
 }

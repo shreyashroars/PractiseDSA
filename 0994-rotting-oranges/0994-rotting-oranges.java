@@ -71,9 +71,6 @@ class Solution {
                 return cnt;
              
         }
-        if(rotten_oranges==total_oranges)
-            return cnt;
-        else
             return -1;
         
     }

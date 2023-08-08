@@ -19,23 +19,21 @@ class Solution {
         m=mat[0].length;
         for(int i=0;i<n;i++)   
         {
-            if(mat[i][0]=='O')
-                dfs(i,0,mat);
+            int j=0;
+            if(mat[i][j]=='O')  
+                dfs(i,j,mat);
+            j=m-1;
+            if(mat[i][j]=='O')  
+                dfs(i,j,mat);
         }
         for(int i=0;i<m;i++)
         {
-            if(mat[0][i]=='O')
-                dfs(0,i,mat);
-        }
-        for(int i=0;i<n;i++)
-        {
-            if(mat[i][m-1]=='O')
-                dfs(i,m-1,mat);
-        }
-         for(int i=0;i<m;i++)
-        {
-            if(mat[n-1][i]=='O')
-                dfs(n-1,i,mat);
+            int j=0;
+            if(mat[j][i]=='O')   
+                dfs(j,i,mat);
+            j=n-1;
+            if(mat[j][i]=='O')
+                dfs(j,i,mat);
         }
         // for(int i=0;i<n;i++)
         // {

@@ -13,12 +13,13 @@ class Solution {
     ListNode prev=null;
     public void rev(ListNode curr)
     {
-        if(curr==null)
-            return;
-        ListNode next=curr.next;
-        curr.next=prev;
-        prev=curr;
-        rev(next);
+        while(curr!=null)
+        {
+            ListNode next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
     }
     public boolean isPalindrome(ListNode head) {
         if(head.next==null)

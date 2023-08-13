@@ -1,30 +1,61 @@
+class Pair
+{
+    int val;
+    int ind;
+    Pair(int v,int i)
+    {
+        val=v;
+        ind=i;
+    }
+    @Override
+    public String toString()
+    {
+        return this.val+" "+this.ind;
+    }
+}
 class Solution {
     public int[] kWeakestRows(int[][] mat, int k) {
-        int m=mat.length;
-        int n=mat[0].length;
-        int arr[]=new int[m];
-      for(int i=0;i<m;i++)
-          for(int j=0;j<n;j++)
-          {
-             if(mat[i][j]==1)
-                 arr[i]++;
-          }
-        int ar[]=new int[k];
-        int l=0;
-        int min=0;
-        while(l<k)
+        Pair ans[]=new Pair[mat.length];
+        Comparator<Pair>comp=new Comparator<Pair>(){
+            public int compare(Pair a,Pair b)
+            {
+                if(a.val>b.val)
+                    return 1;
+                else if(a.val<b.val)
+                    return -1;
+                else
+                    return 0;
+            }
+        };
+        int i=0;
+        for(int rows[]:mat)
         {
-            for(int i=0;i<m;i++)
-                if(arr[min]>arr[i])
+            int res=-1;
+            int low=0;
+            int high=mat[0].length-1;
+            while(low<=high)
+            {
+                int mid=(low+high)/2;
+                if(rows[mid]==1)
                 {
-                    min=i;
+                    res=mid+1;
+                    low=mid+1;
                 }
-             arr[min]=1000;
-            ar[l]=min;
-                l++;
-            min=0;
+                else if(rows[mid]==0)
+                    high=mid-1;
+            }
+            ans[i]=new Pair(res,i); 
+            i++;
         }
-        return ar;
-        
+        System.out.println(Arrays.toString(ans));
+        Arrays.sort(ans,comp);
+        System.out.println(Arrays.toString(ans));
+        int answer[]=new int[k];
+        for(int j=0;j<k;j++)
+        {
+            answer[j]=ans[j].ind;
+        }
+        return answer;
+       
     }
 }

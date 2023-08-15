@@ -43,7 +43,7 @@ class Node {
         if (map.containsKey(key)) {
             remove(map.get(key));
         }
-        if (map.size() == c) {
+        else if (map.size() == c) {
             remove(tail.prev);
         }
         Node newNode =new Node(key, value);

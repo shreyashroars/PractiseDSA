@@ -1,21 +1,34 @@
 class Solution {
-    public int rec(int [][] arr,int i,int j,int n,int m,int[][] dp)
-    {
-        if(i>=n ||j>=m || arr[i][j]==1)
-            return 0;
-        if(i==n-1 && j==m-1)
-            return 1;
-        if(dp[i][j]!=-1)
-            return dp[i][j];
-        return dp[i][j]=rec(arr,i+1,j,n,m,dp)+rec(arr,i,j+1,n,m,dp);
-    }
     public int uniquePathsWithObstacles(int[][] arr) {
         int n=arr.length;
         int m=arr[0].length;
          int dp[][]=new int[n][m];
-        for(int rows[]:dp)
-            Arrays.fill(rows,-1);
-        return rec(arr,0,0,n,m,dp);
+        if(arr[0][0]==1)
+            return 0;
+        dp[0][0]=1;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(i==0 && j==0)
+                    continue;
+                if(arr[i][j]==1)
+                    dp[i][j]=0;
+                else
+                {
+                    int up=0;
+                    if(i>=1)
+                     up=dp[i-1][j];
+                    int left=0;
+                    if(j>=1)
+                     left=dp[i][j-1];
+                    dp[i][j]=up+left;
+                }
+                
+            }
+        }
+        return dp[n-1][m-1];
+        
         
     }
 }

@@ -1,26 +1,21 @@
 class Solution {
-        static int mazeob(int i,
-  int j,int[][] mat,int[][] dp)
+    public int rec(int [][] arr,int i,int j,int n,int m,int[][] dp)
     {
-        if(i==0 && j==0 && mat[i][j]!=1)
+        if(i>=n ||j>=m || arr[i][j]==1)
+            return 0;
+        if(i==n-1 && j==m-1)
             return 1;
-        if(i<0 ||j<0)
-            return 0;
-        if(mat[i][j]==1)
-            return 0;
         if(dp[i][j]!=-1)
-                return dp[i][j];
-       int up=mazeob(i-1,j,mat,dp);
-       int left=mazeob(i,j-1,mat,dp);
-        return dp[i][j]=up+left;
+            return dp[i][j];
+        return dp[i][j]=rec(arr,i+1,j,n,m,dp)+rec(arr,i,j+1,n,m,dp);
     }
-    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-      
-        int n=obstacleGrid.length;
-        int m=obstacleGrid[0].length;
-          int [][] dp=new int[n][m];
-        for(int []rows:dp)
+    public int uniquePathsWithObstacles(int[][] arr) {
+        int n=arr.length;
+        int m=arr[0].length;
+         int dp[][]=new int[n][m];
+        for(int rows[]:dp)
             Arrays.fill(rows,-1);
-        return mazeob(n-1,m-1,obstacleGrid,dp);
+        return rec(arr,0,0,n,m,dp);
+        
     }
 }

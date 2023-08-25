@@ -1,25 +1,20 @@
 class Solution {
-    int n;
-    public int minimumTotal(List<List<Integer>> t) {
+    public int rec(List<List<Integer>> tr,int i,int j,int m,int[][]dp)
+    {
+        if(i==m-1)
+            return tr.get(i).get(j);
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        return dp[i][j]=Math.min(rec(tr,i+1,j,m,dp),rec(tr,i+1,j+1,m,dp))+tr.get(i).get(j);
         
-        n=t.get(t.size()-1).size();
-       // int dp[][]=new int[n][n];
-        int prev[]=new int[n];
-        for(int j=0;j<=n-1;j++)
-            prev[j]=t.get(n-1).get(j);
-        for(int i=n-2;i>=0;i--)
-        {
-            int curr[]=new int[i+1];
-            int d=Integer.MAX_VALUE,dg=Integer.MAX_VALUE;
-            for(int j=i;j>=0;j--)
-            {
-          d=t.get(i).get(j)+prev[j];
-         dg=t.get(i).get(j)+prev[j+1];
-         curr[j]=d>dg?dg:d;
-                
-            }
-          prev=curr;
-        }
-        return prev[0];
+    }
+    public int minimumTotal(List<List<Integer>> tr) {
+        int m=tr.size();
+        int n=tr.get(m-1).size();
+        int dp[][]=new int[m][n];
+        for(int rows[]:dp)
+            Arrays.fill(rows,-1);
+        return rec(tr,0,0,m,dp);
+        
     }
 }

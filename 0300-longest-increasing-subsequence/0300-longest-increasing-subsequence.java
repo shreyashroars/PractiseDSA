@@ -3,7 +3,7 @@ class Solution {
 	{
 		if(ind==arr.length)
 		return 0;
-		if(dp[ind][prevInd+1]!=-(int)1e9)
+		if(dp[ind][prevInd+1]!=-1)
 		return dp[ind][prevInd+1];
 		int not_take=rec(ind+1,prevInd,arr,dp);
 		int take=-(int)1e9;
@@ -16,7 +16,7 @@ class Solution {
         	int n=arr.length;
 		   int dp[][]=new int[n][n+1];
 		   for(int rows[]:dp)
-		   Arrays.fill(rows,-(int)1e9);
+		   Arrays.fill(rows,-1);
 		  return rec(0,-1,arr,dp);
         
     }

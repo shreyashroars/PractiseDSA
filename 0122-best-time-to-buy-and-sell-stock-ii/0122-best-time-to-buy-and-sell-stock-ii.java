@@ -1,33 +1,29 @@
 class Solution {
-   int profit=-2;
-    public int maxProfit(int[] prices) {
-       
-        int ahead[]=new int[2];
-        int curr[]=new int[2];
-        ahead[0]=ahead[1]=0;
-       for(int ind=prices.length-1;ind>=0;ind--)
-       {
-           for(int buy=0;buy<=1;buy++)
-           {
-            if(buy==1)
-       {
-           profit=Math.max(-prices[ind]+ahead[0]//bought the stock on that day
-                           ,0+ahead[1]//not bought the stock on that day
-                          );
-    }
-    else
+    public int rec(int ind,int buy,int arr[],int n,int dp[][])
     {
-        profit=Math.max(prices[ind]+ahead[1]//bought the stock on that day
-                           ,0+ahead[0]//not bought the stock on that day
-                          );
-        
+        if(ind==n)
+            return 0;
+        if(dp[ind][buy]!=-1)
+            return dp[ind][buy];
+        if(buy==1)
+        {
+            int not_take=0+rec(ind+1,1,arr,n,dp);
+            int take=-arr[ind]+rec(ind+1,0,arr,n,dp);
+            return dp[ind][buy]=Math.max(take,not_take);
+        }
+        else
+        {
+            int not_take=0+rec(ind+1,0,arr,n,dp);
+            int take=arr[ind]+rec(ind+1,1,arr,n,dp);
+            return dp[ind][buy]=Math.max(take,not_take);
+        }
     }
-       curr[buy]=profit;
-       }
-          ahead=curr;
-       }
-           
+    public int maxProfit(int[] prices) {
+        int n=prices.length;
+        int dp[][]=new int[n][2];
+        for(int rows[]:dp)
+            Arrays.fill(rows,-1);
+        return rec(0,1,prices,n,dp);
         
-      return ahead[1];
     }
 }

@@ -1,23 +1,18 @@
 class Solution {
-    public int subarraySum(int[] nums, int k) {
-      HashMap<Integer,Integer>h=new HashMap<>();
-        h.put(0,1);
-        int cnt=0,presum=0;
-        for(int i=0;i<nums.length;i++)
+    public int subarraySum(int[] arr, int k) {
+      int prefSum=0,total=0;
+        int n=arr.length;
+        HashMap<Integer,Integer>map=new HashMap<>();
+        for(int i=0;i<n;i++)
         {
-             presum+=nums[i];
-            int remove_frm_presum=presum-k;
-            if(h.containsKey(remove_frm_presum))
-            {
-                cnt+=h.get(remove_frm_presum);
-               // System.out.print(remove_frm_presum);
-            }
-            if(h.containsKey(presum))
-                h.put(presum,h.get(presum)+1);
-            else
-                h.put(presum,1);
-            
+            prefSum+=arr[i];
+            if(prefSum==k)
+                total++;
+            if(map.containsKey(prefSum-k))
+                total=total+map.get(prefSum-k);
+            map.put(prefSum,map.getOrDefault(prefSum,0)+1);
+                
         }
-        return cnt;
+        return total;
     }
 }
